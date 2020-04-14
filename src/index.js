@@ -1,3 +1,4 @@
+import http from 'http'
 import express from 'express'
 import bodyParser from 'body-parser'
 import helmet from 'helmet'
@@ -5,9 +6,14 @@ import compression from 'compression'
 import logger from 'morgan'
 import cors from 'cors'
 import errorhandler from 'errorhandler'
+import socketIO from 'socket.io'
+
 import pkg from '../package.json'
 
 const app = express()
+const server = http.createServer(app)
+const io = socketIO(server)
+
 const port = process.env.PORT || 5200
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -19,6 +25,14 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json({ limit: '16mb' }))
 if (isDev) app.use(errorhandler())
 app.use(cors())
+
+io.on('connection', (socket) => {
+  console.log('New client connected' + socket.id)
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected')
+  })
+})
 
 app.get('/test', (req, res, next) => {
   res.send('Response from server')
@@ -46,7 +60,7 @@ app.use((err, req, res, next) => {
   }
 })
 
-app.listen(port, (err) => {
+server.listen(port, (err) => {
   if (err) throw err
 
   console.log(
