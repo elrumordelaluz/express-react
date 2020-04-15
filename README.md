@@ -1,6 +1,6 @@
-# Expresstart
+# Express React Starter
 
-Starter files for basic [Express](https://expressjs.com/) Server.
+Starter files for basic [Express](https://expressjs.com/) Server with a proxied _React_ App
 
 - Reloading using `nodemon`
 - Using ES6 in the source
@@ -8,7 +8,7 @@ Starter files for basic [Express](https://expressjs.com/) Server.
 
 ```
 # clone the repo
-git clone https://github.com/elrumordelaluz/expresstart.git my-express-server
+git clone https://github.com/elrumordelaluz/express-react my-app
 ```
 
 ```
