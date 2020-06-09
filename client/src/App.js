@@ -14,7 +14,7 @@ function App() {
   }, [])
 
   const [socket] = useSocket(`/`)
-  console.log({ socket })
+
   return (
     <div className="App">
       <header className="App-header">
